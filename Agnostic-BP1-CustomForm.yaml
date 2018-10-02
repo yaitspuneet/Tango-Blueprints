@@ -1,0 +1,29 @@
+inputs:
+  size:
+    type: string
+    enum:
+      - Small-IndiaVBC
+      - Medium-IndiaVBC
+    description: Size of Nodes
+    title: Node Size
+  platform:
+    type: string
+    enum:
+      - 'platform:vcenter'
+      - 'platform:aws'
+    description: Platform Choice - vCenter/AWS
+    title: platform
+  image:
+    type: string
+    enum:
+      - IndiaVBC-Template-Centos
+    title: Select Image/OS
+resources:
+  Test-VM:
+    type: Cloud.Machine
+    properties:
+      image: '${input.image}'
+      flavor: '${input.size}'
+      constraints:
+        - tag: '${input.platform}'
+      networks: []
